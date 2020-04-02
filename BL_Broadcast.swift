@@ -22,7 +22,7 @@ var listViewData = ListViewData()
 // List of users already seen to not spam the list, ofcourse this should not be used in an actual implementation 
 var alreadySeen = [CBUUID]()
 
-// log status to console
+// Log status to console
 func status(of: String, value: String){
     print(of + ": " + value)
 }
@@ -84,7 +84,7 @@ class BL_Broadcast: UIViewController, CBPeripheralManagerDelegate, CBCentralMana
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        // store reference of discovered peripheral and connect (if reference isn't kept, connect would be unsuccessful)
+        // Store reference of discovered peripheral and connect (if reference isn't kept, connect would be unsuccessful)
         peripheralStorage[peripheral.identifier] = peripheral
         centralManager.connect(peripheral, options: nil)
     }
@@ -96,7 +96,7 @@ class BL_Broadcast: UIViewController, CBPeripheralManagerDelegate, CBCentralMana
     }
     
     func peripheral( _ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        // services discover search for our service and discover characteristics
+        // Services discovered search for our service and discover characteristics
         for service in peripheral.services! {
             if(service.uuid == S_UUID){
                 peripheral.discoverCharacteristics(nil, for: service)
@@ -115,7 +115,7 @@ class BL_Broadcast: UIViewController, CBPeripheralManagerDelegate, CBCentralMana
             listViewData.items.append(CInfo(uuid: user_uuid.uuidString, time: dateString))
             alreadySeen.append(user_uuid)
         }
-        // remove reference to the device since we are done
+        // Remove reference to the device since we are done
         peripheralStorage.removeValue(forKey: peripheral.identifier)
     }
 
@@ -133,7 +133,7 @@ class BL_Broadcast: UIViewController, CBPeripheralManagerDelegate, CBCentralMana
     }
     
     func stopAll(){
-        // very basic stopFunction, that just removes reference to all objects therefor iOS cleansup
+        // Very basic stop function, that just removes reference to all objects therefor iOS cleansup
         if(peripheralManager != nil && peripheralManager.isAdvertising){
             peripheralManager.stopAdvertising();
         }
@@ -142,6 +142,7 @@ class BL_Broadcast: UIViewController, CBPeripheralManagerDelegate, CBCentralMana
         alreadySeen = [CBUUID]()
     }
     
+    // Init function
     func dewIt(){
         //Initializes bluetooth, after launch is complete and successful iOS calls centralManagerDidUpdateStat with state = .poweredOn
         centralManager = CBCentralManager.init(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: true])
