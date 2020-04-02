@@ -73,12 +73,12 @@ class BL_Broadcast: UIViewController, CBPeripheralManagerDelegate, CBCentralMana
         if central.state == .poweredOn {
             // Launch successful
             status(of: "CentralBluetooth", value: "online")
-            // start peripheral for Advertisment, peripheralManagerDidUpdateState with state = .poweredOn is called if successful
+            // start peripheralManager for Advertisment, peripheralManagerDidUpdateState with state = .poweredOn is called if successful
             peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
             // start scanning for other devices without registering duplicates since when the application goes into background mode this will happen nevertheless 
             centralManager.scanForPeripherals(withServices: [S_UUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
         } else {
-            // Possibly the permission was denyed, state would then be .unauthorized
+            // Possibly the permission was denied, state would then be .unauthorized
             status(of: "CentralBluetooth", value: "not ready")
         }
     }
