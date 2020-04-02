@@ -5,6 +5,5 @@ This app sends a beacon with a specified service uuid and upon connection from a
 **The app works Android <--> iOS but not iOS <--> iOS**
 
 ### Import project
-1. Create a new Xcode project and select "Single View App"
-2. For language select Swift and for User Interface select SwiftUI
-4. Now copy BL_Broadcast.swift, ContentView.swift and Info.plist into your new project
+1. Clone git repository or download it manually
+2. Double click BLETrack.xcodeproj or open it from XCode
